@@ -44,6 +44,7 @@ async function run() {
 
 document.addEventListener('DOMContentLoaded', run);
 
+
 function getModel() {
   const model = tf.sequential();
   
@@ -174,5 +175,6 @@ async function showConfusion(model, data) {
 
   labels.dispose();
 }
+
 
 
