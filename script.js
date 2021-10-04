@@ -14,7 +14,7 @@ async function getData() {
 
   return cleaned;
 }
-/*
+
 async function run() {
   // Load and plot the original input data that we are going to train on.
   const data = await getData();
@@ -34,10 +34,17 @@ async function run() {
   );
 
   // More code will be added below
-}
-*/
+	const tensorData = convertToTensor(data);
+	const {inputs, labels} = tensorData;
 
-//document.addEventListener('DOMContentLoaded', run);
+	// Train the model
+	trainModel(model, inputs, labels);
+	console.log('Done Training');
+
+}
+
+
+document.addEventListener('DOMContentLoaded', run);
 
 function createModel() {
   // Create a sequential model
@@ -48,6 +55,8 @@ function createModel() {
 
   // Add an output layer
   model.add(tf.layers.dense({units: 1, useBias: true}));
+  //model.add(tf.layers.dense({units: 50, activation: 'sigmoid'}));
+
 
   return model;
 }
@@ -121,5 +130,12 @@ async function trainModel(model, inputs, labels) {
     )
   });
 }
+/*
+const data = getData();
+const tensorData = convertToTensor(data);
+const {inputs, labels} = tensorData;
 
-
+// Train the model
+trainModel(model, inputs, labels);
+console.log('Done Training');
+*/
