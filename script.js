@@ -130,12 +130,3 @@ async function trainModel(model, inputs, labels) {
     )
   });
 }
-/*
-const data = getData();
-const tensorData = convertToTensor(data);
-const {inputs, labels} = tensorData;
-
-// Train the model
-trainModel(model, inputs, labels);
-console.log('Done Training');
-*/
