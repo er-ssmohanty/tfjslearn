@@ -33,7 +33,7 @@ async function run() {
     }
   );
 
-  // More code will be added below
+
 	const tensorData = convertToTensor(data);
 	const {inputs, labels} = tensorData;
 
@@ -55,7 +55,7 @@ function createModel() {
 
   // Add an output layer
   //model.add(tf.layers.dense({units: 1, useBias: true}));
-  model.add(tf.layers.dense({units: 50, activation: 'sigmoid'}));
+  model.add(tf.layers.dense({units: 1, activation: 'relu'}));
 
 
   return model;
@@ -176,4 +176,5 @@ function testModel(model, inputData, normalizationData) {
     }
   );
 }
+
 
