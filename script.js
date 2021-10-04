@@ -33,13 +33,17 @@ async function run() {
     }
   );
 
+	// Create the model
+	const model = createModel();
+	tfvis.show.modelSummary({name: 'Model Summary'}, model);
 
 	const tensorData = convertToTensor(data);
 	const {inputs, labels} = tensorData;
-
 	// Train the model
-	trainModel(model, inputs, labels);
+
+	await trainModel(model, inputs, labels);
 	console.log('Done Training');
+	
 	testModel(model, data, tensorData);
 }
 
@@ -52,18 +56,17 @@ function createModel() {
 
   // Add a single input layer
   model.add(tf.layers.dense({inputShape: [1], units: 1, useBias: true}));
-  model.add(tf.layers.dense({units: 50, activation: 'relu'}));
-  model.add(tf.layers.dense({units: 25, activation: 'softmax'}));
+  //Add hidden layers
+  model.add(tf.layers.dense({inputShape: [1], units: 1, useBias: true}));
+  model.add(tf.layers.dense({units: 1}));
+  //model.add(tf.layers.dense({units: 50, activation: 'relu'}));
+  //model.add(tf.layers.dense({units: 25, activation: 'softmax'}));
   // Add an output layer
   model.add(tf.layers.dense({units: 1, useBias: true}));
-  //model.add(tf.layers.dense({units: 1, activation: 'sigmoid', useBias: true}));
-
+  
 
   return model;
 }
-// Create the model
-const model = createModel();
-tfvis.show.modelSummary({name: 'Model Summary'}, model);
 
 /**
  * Convert the input data to tensors that we can use for machine
