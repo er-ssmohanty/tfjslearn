@@ -52,10 +52,11 @@ function createModel() {
 
   // Add a single input layer
   model.add(tf.layers.dense({inputShape: [1], units: 1, useBias: true}));
-
+  model.add(tf.layers.dense({units: 50, activation: 'relu'}));
+  model.add(tf.layers.dense({units: 25, activation: 'softmax'}));
   // Add an output layer
-  //model.add(tf.layers.dense({units: 1, useBias: true}));
-  model.add(tf.layers.dense({units: 1, activation: 'relu'}));
+  model.add(tf.layers.dense({units: 1, useBias: true}));
+  //model.add(tf.layers.dense({units: 1, activation: 'sigmoid', useBias: true}));
 
 
   return model;
@@ -133,7 +134,7 @@ async function trainModel(model, inputs, labels) {
 
 /*Testing Testing Testing*/
 
-function testModel(model, inputData, normalizationData) {
+async function testModel(model, inputData, normalizationData) {
   const {inputMax, inputMin, labelMin, labelMax} = normalizationData;
 
   // Generate predictions for a uniform range of numbers between 0 and 1;
@@ -166,7 +167,7 @@ function testModel(model, inputData, normalizationData) {
   }));
 
 
-  tfvis.render.scatterplot(
+  await tfvis.render.scatterplot(
     {name: 'Model Predictions vs Original Data'},
     {values: [originalPoints, predictedPoints], series: ['original', 'predicted']},
     {
