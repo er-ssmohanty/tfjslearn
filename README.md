@@ -15,3 +15,5 @@ Uncaught (in promise) DOMException: Failed to execute 'drawImage' on 'CanvasRend
     at https://cdn.jsdelivr.net/npm/@tensorflow/tfjs:17:159450
 ﻿
 ￼
+
+But wait, after sometime it is showing the result in console, but the image is not showing at all.
